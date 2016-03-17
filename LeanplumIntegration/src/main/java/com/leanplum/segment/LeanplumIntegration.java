@@ -1,3 +1,5 @@
+// Copyright 2016, Leanplum, Inc.
+
 package com.leanplum.segment;
 
 import android.app.Application;
