@@ -1,4 +1,4 @@
-package com.leanplum.android.segment;
+package com.leanplum.segment;
 
 import android.app.Application;
 

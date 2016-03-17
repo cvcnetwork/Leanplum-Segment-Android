@@ -1,4 +1,9 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+group = project.bintrayGroupId
+version = project.bintrayPackageVersion
 
 android {
     compileSdkVersion 23
@@ -8,7 +13,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName project.bintrayPackageVersion
     }
     buildTypes {
         release {
@@ -21,6 +26,80 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.2.1'
-    provided 'com.segment.analytics.android:analytics:4.0.4'
-    compile 'com.leanplum:Leanplum:+'
+    provided 'com.segment.analytics.android:analytics:4.+'
+    provided 'com.leanplum:Leanplum:1.+'
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name project.bintrayArtifactId
+            description 'Leanplum SDK integration for the Segment iOS SDK.'
+            url 'https://github.com/Leanplum/Leanplum-Segment-Android'
+            inceptionYear '2016'
+
+            packaging 'aar'
+            groupId project.bintrayGroupId
+            artifactId project.bintrayArtifactId
+            version project.bintrayPackageVersion
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                connection 'https://github.com/Leanplum/Leanplum-Segment-Android.git'
+                url 'https://github.com/Leanplum/Leanplum-Segment-Android'
+
+            }
+            developers {
+                developer {
+                    name 'Ben Marten'
+                }
+            }
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = 'segment'
+        userOrg = 'leanplum'
+        desc = 'Leanplum SDK integration for the Segment Android SDK.'
+        labels = ['leanplum', 'integration', 'segment', 'analytics', 'A/B ' +
+                'testing', 'mobile', 'personalization']
+        vcsUrl = 'https://github.com/Leanplum/Leanplum-Segment-Android.git'
+        websiteUrl = 'https://github.com/Leanplum/Leanplum-Segment-Android'
+        licenses = ['Apache-2.0']
+        githubRepo = 'Leanplum/Leanplum-Segment-Android'
+        githubReleaseNotesFile = 'README.md'
+        issueTrackerUrl = 'https://github.com/Leanplum/Leanplum-Segment-Android/issues'
+        publicDownloadNumbers = false
+        //noinspection GroovyAssignabilityCheck
+        version {
+            name = project.bintrayPackageVersion
+            desc = 'Leanplum SDK integration for the Segment Android SDK.'
+            vcsTag = project.bintrayPackageVersion
+            //Optional configuration for GPG signing
+            gpg {
+                sign = true
+            }
+            //Optional configuration for Maven Central sync of the version
+            mavenCentralSync {
+                sync = false //Optional (true by default). Determines whether to
+                // sync the version to Maven Central.
+                user = 'userToken' //OSS user token
+                password = 'paasword' //OSS user password
+                close = '1'
+                //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+            }
+        }
+    }
 }

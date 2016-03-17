@@ -1,4 +1,4 @@
-package com.leanplum.android.segment.example;
+package com.leanplum.segment.example;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumPushService;
-import com.leanplum.android.segment.LeanplumIntegration;
+import com.leanplum.segment.LeanplumIntegration;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.Properties;
 import com.segment.analytics.Traits;
