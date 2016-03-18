@@ -70,7 +70,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = 'maven'
-        name = 'segment'
+        name = project.bintrayPackageName
         userOrg = 'leanplum'
         desc = 'Leanplum SDK integration for the Segment Android SDK.'
         labels = ['leanplum', 'integration', 'segment', 'analytics', 'A/B ' +
