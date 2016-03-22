@@ -17,8 +17,7 @@ allprojects {
     repositories {
         jcenter()
         maven {
-//            url "http://www.leanplum.com/leanplum-sdks/"
-            url 'https://dl.bintray.com/leanplum/maven/'
+            url "http://www.leanplum.com/leanplum-sdks/"
         }
     }
 }
