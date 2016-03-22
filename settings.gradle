@@ -1,1 +1,3 @@
-include ':Example', ':LeanplumIntegration'
+include ':LeanplumIntegration'
+include ':Example'
+

@@ -24,19 +24,16 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.2.1'
     provided 'com.segment.analytics.android:analytics:4.+'
-    provided 'com.leanplum:Leanplum:1.+'
+    provided 'com.leanplum:Leanplum:1.+@aar'
 }
 
 install {
     repositories.mavenInstaller {
         pom.project {
             name project.bintrayArtifactId
-            description 'Leanplum SDK integration for the Segment iOS SDK.'
-            url 'https://github.com/Leanplum/Leanplum-Segment-Android'
-            inceptionYear '2016'
+            description project.bintrayDescription
+            url 'https://github.com/' + project.bintrayGithub
 
             packaging 'aar'
             groupId project.bintrayGroupId
@@ -51,13 +48,13 @@ install {
                 }
             }
             scm {
-                connection 'https://github.com/Leanplum/Leanplum-Segment-Android.git'
-                url 'https://github.com/Leanplum/Leanplum-Segment-Android'
+                connection 'https://github.com/' + project.bintrayGithub + '.git'
+                url 'https://github.com/' + project.bintrayGithub
 
             }
             developers {
                 developer {
-                    name 'Ben Marten'
+                    name project.bintrayAuthor
                 }
             }
         }
@@ -71,21 +68,21 @@ bintray {
     pkg {
         repo = 'maven'
         name = project.bintrayPackageName
-        userOrg = 'leanplum'
-        desc = 'Leanplum SDK integration for the Segment Android SDK.'
-        labels = ['leanplum', 'integration', 'segment', 'analytics', 'A/B ' +
-                'testing', 'mobile', 'personalization']
-        vcsUrl = 'https://github.com/Leanplum/Leanplum-Segment-Android.git'
-        websiteUrl = 'https://github.com/Leanplum/Leanplum-Segment-Android'
+        userOrg = project.bintrayUserOrg
+        desc = project.description
+        labels = project.bintrayLabels
+        vcsUrl = 'https://github.com/' + project.bintrayGithub + '.git'
+        websiteUrl = 'https://github.com/' + project.bintrayGithub
         licenses = ['Apache-2.0']
-        githubRepo = 'Leanplum/Leanplum-Segment-Android'
+        githubRepo = project.bintrayGithub
         githubReleaseNotesFile = 'README.md'
-        issueTrackerUrl = 'https://github.com/Leanplum/Leanplum-Segment-Android/issues'
+        issueTrackerUrl = 'https://github.com/' + project.bintrayGithub +
+        '/issues'
         publicDownloadNumbers = false
         //noinspection GroovyAssignabilityCheck
         version {
             name = project.bintrayPackageVersion
-            desc = 'Leanplum SDK integration for the Segment Android SDK.'
+            desc = project.bintrayDescription
             vcsTag = project.bintrayPackageVersion
             //Optional configuration for GPG signing
             gpg {
