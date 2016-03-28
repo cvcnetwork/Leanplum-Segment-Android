@@ -2,7 +2,7 @@
 A Segment integration for the Leanplum Android SDK.
 
 ## Installation
-Because Leanplum SDK is not yet available via jcenter or mavenCentral, please add the following maven url to your project build.gradle file:
+To install the Leanplum SDK, please add the following maven url to your project build.gradle file:
 ```groovy
 allprojects {
     repositories {
