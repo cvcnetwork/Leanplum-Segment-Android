@@ -21,6 +21,14 @@ dependencies {
   compile 'com.leanplum.segment:LeanplumIntegration:1.0.0'
 }
 ```
+Please add at least the following permissions to your applications AndroidManifest.xml:
+```xml
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<uses-permission android:name="android.permission.INTERNET"/>
+```
+
+If you want to use the advanced features of Leanplum, please add the additional permissions, as described [here](https://www.leanplum.com/docs#/setup/android).
+
 That's it! Now you can use the Segment SDK and also the [advanced features](https://www.leanplum.com/docs#/docs) of the Leanplum SDK.
 
 ## Usage
