@@ -16,7 +16,7 @@ import com.segment.analytics.Traits;
 public class MainActivity extends AppCompatActivity {
 
   private static final String SEGMENT_WRITE_KEY =
-      "YLaT0mS6h8GdU0KErzTNsPfPvQqDV7sP";
+      "5L3HqU7fveZSxm5OUtefU4r3zIO2pX56";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +24,20 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
-    if (BuildConfig.DEBUG) {
-      Leanplum.setApiConnectionSettings(
-          "leanplum-staging.appspot.com", "api", true);
-      Leanplum.setSocketConnectionSettings("dev-staging.leanplum.com", 443);
-      Leanplum.enableVerboseLoggingInDevelopmentMode();
-    }
 
     // Create an analytics client with the given context and Segment write key.
     Analytics analytics = new Analytics
         .Builder(getApplicationContext(), SEGMENT_WRITE_KEY)
         .use(LeanplumIntegration.FACTORY)
         .build();
+
+    analytics.onIntegrationReady(LeanplumIntegration.LEANPLUM_SEGMENT_KEY,
+        new Analytics.Callback() {
+          @Override
+          public void onReady(Object instance) {
+            Leanplum.track("test");
+          }
+        });
 
     // Set the initialized instance as a globally accessible instance.
     Analytics.setSingletonInstance(analytics);

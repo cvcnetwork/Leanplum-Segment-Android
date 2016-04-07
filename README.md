@@ -48,9 +48,17 @@ Now you can use Segment as you are used to, e.g.:
 analytics.track(" ... ", ... );
 ```
 
-In addition to that you can also use the advanced features of Leanplum, e.g.:
+Note: There is no need to explicitly call Leanplum.start, as it is called within the LeanplumIntegration.
+
+In addition to that you can also use the advanced features of Leanplum. Once the Leanplum SDK is successfully registered, Segement executes a callback:
 ```java
-Leanplum.addVariablesChangedHandler( ... );
+analytics.onIntegrationReady(LeanplumIntegration.LEANPLUM_SEGMENT_KEY,
+    new Analytics.Callback() {
+      @Override
+      public void onReady(Object instance) {
+        Leanplum.addVariablesChangedHandler( ... );
+      }
+    });
 ```
 
 ## Example

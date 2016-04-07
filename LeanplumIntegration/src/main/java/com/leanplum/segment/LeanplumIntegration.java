@@ -23,13 +23,13 @@ import com.segment.analytics.integrations.TrackPayload;
  */
 public class LeanplumIntegration extends Integration {
 
-  private static final String LEANPLUM_KEY = "Leanplum";
+  public static final String LEANPLUM_SEGMENT_KEY = "Leanplum";
   private Logger logger;
 
   public static final Factory FACTORY = new Factory() {
     @Override
     public Integration<?> create(ValueMap settings, Analytics analytics) {
-      Logger logger = analytics.logger(LEANPLUM_KEY);
+      Logger logger = analytics.logger(LEANPLUM_SEGMENT_KEY);
       String appId = settings.getString("appId");
       String key = settings.getString("clientKey");
       Boolean isDevelopmentMode = settings.getBoolean("devMode", false);
@@ -49,7 +49,7 @@ public class LeanplumIntegration extends Integration {
 
     @Override
     public String key() {
-      return LEANPLUM_KEY;
+      return LEANPLUM_SEGMENT_KEY;
     }
   };
 
