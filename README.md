@@ -101,8 +101,8 @@ To upload a new version to jCenter or mavenCentral we use bintray.com.
 4. Run gradle build & upload scripts
   
   ```bash
-  gradle install
-  gradle bintrayUpload
+  ./gradlew install
+  ./gradlew bintrayUpload
   ```
 5. Go to bintray.com to double check your new release.
 
