@@ -17,7 +17,7 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            url "http://www.leanplum.com/leanplum-sdks/"
+            url "https://repo.leanplum.com/"
         }
     }
 }
