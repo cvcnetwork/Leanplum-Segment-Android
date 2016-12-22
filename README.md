@@ -18,7 +18,7 @@ modules build.gradle file:
 ```groovy
 dependencies {
   compile 'com.segment.analytics.android:analytics:4.0.4'
-  compile 'com.leanplum.segment:LeanplumIntegration:1.0.0'
+  compile 'com.leanplum.segment:LeanplumIntegration:{{LP_SEG_VERSION}}'
 }
 ```
 Please add at least the following permissions to your applications AndroidManifest.xml:
@@ -65,18 +65,18 @@ analytics.onIntegrationReady(LeanplumIntegration.LEANPLUM_SEGMENT_KEY,
 We have included a sample application.
 
 1. To run the sample app, open this folder in Android Studio.
-2. Choose & run target `Example`
+1. Choose & run target `Example`
 
 ## Tests
 We have included unit tests for the integration.
 
 1. To run the unit tests, open this folder in Android Studio.
-2. Choose & run target `LeanplumIntegrationTests`
+1. Choose & run target `LeanplumIntegrationTests`
 
 ## Install Specific Version of SDK's
 By default this integration pulls in the latest versions of the Leanplum SDK and the Segment SDK. If you rather want to use a specific version, simply exclude them from the integration and specify the required versions in your build.gradle file directly.
 ```groovy
-compile('com.leanplum.segment:LeanplumIntegration:1.0.0') {
+compile('com.leanplum.segment:LeanplumIntegration:{{LP_SEG_VERSION}}') {
     exclude group: 'com.segment.analytics.android', module: 'analytics'
     exclude group: 'com.leanplum', module: 'Leanplum'
 }
@@ -93,18 +93,24 @@ To upload a new version to jCenter or mavenCentral we use bintray.com.
   bintrayUser=benmarten
   bintrayApiKey= [...]
   ```
-3. Increase the package version in gradle.properties project file:
-  
-  ```groovy
-  bintrayPackageVersion=1.0.0
-  ```
-4. Run gradle build & upload scripts
+1. Checkout a new release branch from develop:
   
   ```bash
-  ./gradlew install
-  ./gradlew bintrayUpload
+  git checkout develop
+  git checkout -b release/NEW_VERSION
   ```
-5. Go to bintray.com to double check your new release.
+1. Run the bump version script:
+  
+  ```bash
+  sh bump_version.sh
+  ```
+1. Run gradle build & upload scripts
+  
+  ```bash
+  ./gradle install
+  ./gradle bintrayUpload
+  ```
+1. Go to bintray.com to double check your new release.
 
 ## License
 See LICENSE file.
