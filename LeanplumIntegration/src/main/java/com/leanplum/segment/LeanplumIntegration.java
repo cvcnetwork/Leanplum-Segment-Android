@@ -81,7 +81,19 @@ public class LeanplumIntegration extends Integration {
   @Override
   public void track(TrackPayload track) {
     logger.verbose("Track: %s", track);
-    Leanplum.track(track.event(), track.properties());
+    // Since Leanplum has value field that can be associated with any event,
+    // we have to extract that field from Segment and send it with our event as a value.
+    Double value = 0.0D;
+
+    if (track.properties() != null) {
+      value = track.properties().getDouble("value", 0.0D);
+    }
+
+    if (value != 0.0D) {
+      Leanplum.track(track.event(), value, track.properties());
+    } else {
+      Leanplum.track(track.event(), track.properties());
+    }
   }
 
   @Override

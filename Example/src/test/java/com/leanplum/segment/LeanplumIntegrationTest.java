@@ -33,6 +33,8 @@ import java.util.HashMap;
 
 import static com.segment.analytics.Utils.createTraits;
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
@@ -99,14 +101,17 @@ public class LeanplumIntegrationTest {
   @Test
   public void track() throws Exception {
     Traits traits = createTraits("foo").putEmail("foo@bar.com");
+
     TrackPayload trackPayload =
         new TrackPayloadBuilder().traits(traits).build();
 
-    PowerMockito.doNothing().when(Leanplum.class, "track", "", "");
+    PowerMockito.doNothing().when(Leanplum.class, "track", anyString(), anyString());
     Leanplum.track(trackPayload.event(), trackPayload.properties());
 
-    PowerMockito.verifyStatic(Mockito.times(1));
+    trackPayload.properties().putValue(10);
+    PowerMockito.doNothing().when(Leanplum.class, "track", anyString(), anyDouble(), anyString());
     integration.track(trackPayload);
+    PowerMockito.verifyStatic(Mockito.times(2));
   }
 
   @Test
