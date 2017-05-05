@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
 import com.leanplum.LeanplumException;
+import com.leanplum.LeanplumPushService;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.ValueMap;
 import com.segment.analytics.integrations.IdentifyPayload;
@@ -67,6 +68,7 @@ public class LeanplumIntegration extends Integration {
     }
 
     LeanplumActivityHelper.enableLifecycleCallbacks(application);
+    LeanplumPushService.enableFirebase();
     Leanplum.start(application);
     logger.verbose("Leanplum started.");
   }
